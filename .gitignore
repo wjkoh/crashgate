@@ -1,0 +1,19 @@
+# Binaries and build outputs
+/crashgate
+/bin/
+/dist/
+*.test
+*.out
+coverage.txt
+
+# Local private configs and state
+config.json
+state.json
+.env
+.env.*
+
+# OS and editor artifacts
+.DS_Store
+.direnv/
+.idea/
+.vscode/

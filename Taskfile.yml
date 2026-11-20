@@ -1,0 +1,20 @@
+version: '3'
+
+tasks:
+  test:
+    desc: Run go vet and race-enabled unit tests
+    cmds:
+      - go vet ./...
+      - go test -race -count=1 ./...
+
+  build:
+    desc: Build static zero-dependency crashgate binary
+    deps: [test]
+    cmds:
+      - mkdir -p bin
+      - CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o ./bin/crashgate ./cmd/crashgate
+
+  fmt:
+    desc: Format Go source files
+    cmds:
+      - gofmt -w .

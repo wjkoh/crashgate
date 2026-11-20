@@ -1,0 +1,80 @@
+{
+  "portfolio_name": "40:40:20 Core Portfolio",
+  "hledger": {
+    "journal": "~/finance/all.journal",
+    "brokerage_account": "Assets:Brokerage",
+    "cash_account": "Assets:Brokerage:Cash",
+    "investments_prefix": "Assets:Brokerage:Investments:",
+    "other_accounts": [
+      "Assets:Retirement",
+      "Assets:HSA"
+    ],
+    "schwab_activity_glob": "",
+    "ignore_symbols": ["SPAXX", "SWVXX", "SNSXX", "VMFXX"]
+  },
+  "policy": {
+    "cooldown_ltv_max": 0.08,
+    "sector_ltv_cap": 0.20,
+    "broad_crash_ltv_cap": 0.25,
+    "broad_crash_eq_dd": -0.30,
+    "min_tranche_dollars": 10000,
+    "stagflation_apr_block": 7.50,
+    "margin_spread_pct": 2.25,
+    "fallback_apr_pct": 6.25,
+    "tax_wall_start": "",
+    "tax_wall_end": "",
+    "tlh_min_loss_dollars": 5000,
+    "alert_cooldown_days": 7,
+    "health_fail_threshold": 2,
+    "monthly_digest_enabled": true,
+    "monthly_sweep_note": "Sweep excess checking cash directly into brokerage margin cash.",
+    "sleeves": [
+      {
+        "id": "us-large-cap",
+        "name": "US Large Cap Core",
+        "is_core": true,
+        "is_broad_equity": true,
+        "core_target_w": 0.40,
+        "crash_threshold": -0.20,
+        "twins": [
+          { "symbol": "VOO", "reason": "S&P 500, 0.03% ER" },
+          { "symbol": "SCHX", "reason": "Dow Jones US Large-Cap, 0.03% ER" },
+          { "symbol": "IVV", "reason": "iShares Core S&P 500, 0.03% ER" }
+        ]
+      },
+      {
+        "id": "us-mid-cap",
+        "name": "US Mid Cap Core",
+        "is_core": true,
+        "is_broad_equity": true,
+        "core_target_w": 0.40,
+        "crash_threshold": -0.20,
+        "twins": [
+          { "symbol": "VO", "reason": "CRSP US Mid Cap, 0.04% ER" },
+          { "symbol": "SCHM", "reason": "Dow Jones US Mid-Cap, 0.04% ER" },
+          { "symbol": "IJH", "reason": "S&P MidCap 400, 0.05% ER" }
+        ]
+      },
+      {
+        "id": "physical-gold",
+        "name": "Physical Gold Core",
+        "is_core": true,
+        "is_broad_equity": false,
+        "core_target_w": 0.20,
+        "crash_threshold": -0.25,
+        "twins": [
+          { "symbol": "GLDM", "reason": "SPDR Gold MiniShares, 0.10% ER" },
+          { "symbol": "IAUM", "reason": "iShares Gold Trust Micro, 0.09% ER" },
+          { "symbol": "SGOL", "reason": "abrdn Physical Gold Shares, 0.17% ER" }
+        ]
+      }
+    ]
+  },
+  "notify": {
+    "to": "you@example.com",
+    "from": "CrashGate <alerts@example.com>",
+    "subject_prefix": "[CrashGate]",
+    "resend_key_file": "/run/secrets/resend/api_key",
+    "state_file": "~/.local/state/crashgate/state.json"
+  }
+}
