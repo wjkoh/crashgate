@@ -26,6 +26,11 @@
           hledger
           git
         ];
+        shellHook = ''
+          if [ -d .git ] && [ -d .githooks ]; then
+            git config core.hooksPath .githooks
+          fi
+        '';
       };
     });
 
@@ -41,6 +46,10 @@
         subPackages = ["cmd/crashgate"];
         ldflags = ["-s" "-w" "-X main.version=0.1.0"];
       };
+    });
+
+    checks = forEachSupportedSystem ({system, ...}: {
+      package = self.packages.${system}.default;
     });
   };
 }

@@ -18,3 +18,14 @@ tasks:
     desc: Format Go source files
     cmds:
       - gofmt -w .
+
+  check:nix:
+    desc: Verify flake.nix and sandboxed Nix build stay in sync with go.mod
+    cmds:
+      - nix flake check --no-build
+      - nix build --no-link
+      - nix run . -- --version
+
+  check:all:
+    desc: Run Go checks plus Nix flake drift verification
+    deps: [test, "check:nix"]
