@@ -28,6 +28,11 @@ CrashGate takes the opposite approach:
 
 ### 1. Install
 
+**Homebrew:**
+```bash
+brew install wjkoh/tap/crashgate
+```
+
 **Go (`go 1.24+`):**
 ```bash
 go install github.com/wjkoh/crashgate/cmd/crashgate@latest
